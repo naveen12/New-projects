@@ -1,7 +1,7 @@
 
 # coding=utf-8
 # Burp Extender: Security Headers Analyzer
-# Author: Gemini
+# Author: Naveen Yalagandula
 # Version: 1.0
 
 # Jython/Python Standard Libraries
