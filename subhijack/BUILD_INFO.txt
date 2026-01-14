@@ -1,0 +1,394 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                    SUBHIJACK BURP SUITE EXTENSION                             ║
+║                       BUILD & DEPLOYMENT GUIDE                                ║
+║                          Version 1.0.0 - 2026                                 ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ 1. PROJECT STRUCTURE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Location: C:\Users\navee\OneDrive\Documents\New-projects\subhijack\
+
+Contents:
+  • 11 Java source files (.java)
+  • 4 Configuration files (MANIFEST.MF, compile.bat, compile.sh, package-info.java)
+  • 5 Documentation files (.md)
+  • Output directory: dist/subhijack.jar
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ 2. SYSTEM REQUIREMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Required:
+  ✓ Java Development Kit (JDK) 8 or higher
+  ✓ Burp Suite Community or Pro (2021.8+)
+  ✓ Windows, Linux, or macOS operating system
+
+Optional:
+  • Burp Suite Professional (for advanced features)
+  • Git (for version control)
+  • IDE (IntelliJ IDEA, Eclipse, VS Code)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ 3. STEP-BY-STEP BUILD INSTRUCTIONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+WINDOWS BUILD:
+──────────────
+
+Step 1: Verify Java Installation
+  Command: java -version
+  Expected: Java version 8 or higher
+  
+  If not installed:
+    Download: https://www.oracle.com/java/technologies/downloads/
+    Install: JDK 11 or 17 (LTS versions recommended)
+
+Step 2: Locate Burp Suite Installation
+  Common Paths:
+    C:\Program Files\Burp Suite\
+    C:\Program Files\Burp Suite Community Edition\
+    C:\Program Files (x86)\Burp Suite\
+
+Step 3: Set BURP_HOME Environment Variable
+  Command: set BURP_HOME=C:\Program Files\Burp
+  
+  Or set permanently in Windows:
+    1. Right-click "This PC" → Properties
+    2. Click "Advanced system settings"
+    3. Click "Environment Variables"
+    4. Click "New" under User variables
+    5. Variable name: BURP_HOME
+    6. Variable value: C:\Program Files\Burp
+    7. Click OK and restart terminal
+
+Step 4: Navigate to Extension Directory
+  Command: cd C:\Users\navee\OneDrive\Documents\New-projects\subhijack
+
+Step 5: Run Compilation Script
+  Command: compile.bat
+  
+  Expected Output:
+    [+] Burp JAR found: C:\Program Files\Burp\burpsuite_community.jar
+    [*] Compiling Java sources...
+    [+] Compilation completed
+    [*] Creating JAR file...
+    [+] JAR file created successfully
+    [+] JAR file verified successfully
+    [✓] BUILD SUCCESSFUL
+
+Step 6: Verify Build Output
+  Check: dist\subhijack.jar exists
+  Size: Should be > 50 KB
+
+
+LINUX/macOS BUILD:
+──────────────────
+
+Step 1: Verify Java Installation
+  Command: java -version
+  Expected: Java version 8 or higher
+
+Step 2: Locate Burp Suite Installation
+  Typical Paths:
+    /opt/burp/
+    /home/username/burp/
+    /Applications/Burp Suite Community Edition/
+
+Step 3: Set BURP_HOME Environment Variable
+  Command: export BURP_HOME=/path/to/burp
+  
+  Or make permanent in ~/.bashrc or ~/.zshrc:
+    echo 'export BURP_HOME=/path/to/burp' >> ~/.bashrc
+    source ~/.bashrc
+
+Step 4: Navigate to Extension Directory
+  Command: cd ~/Documents/New-projects/subhijack
+
+Step 5: Make Script Executable
+  Command: chmod +x compile.sh
+
+Step 6: Run Compilation Script
+  Command: ./compile.sh
+  
+  Expected Output:
+    [+] Burp JAR found: /path/to/burp/burpsuite_community.jar
+    [*] Compiling Java sources...
+    [+] Compilation completed
+    [*] Creating JAR file...
+    [+] JAR file created successfully
+    [+] JAR file verified successfully
+    [✓] BUILD SUCCESSFUL
+
+Step 7: Verify Build Output
+  Check: ls -la dist/subhijack.jar
+  Size: Should be > 50 KB
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ 4. LOADING IN BURP SUITE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Method 1: Standard Loading
+─────────────────────────
+
+  1. Open Burp Suite
+  2. Navigate to: Extender → Extensions
+  3. Click "Add" button
+  4. Extension type: Java
+  5. Location: Browse to dist/subhijack.jar
+  6. Click "Next"
+  7. Click "Close"
+  8. Verify: "SubHijack" tab appears next to other extension tabs
+
+Method 2: Command Line (if supported)
+──────────────────────────────────────
+
+  Some Burp versions support:
+    burp --load-extension=/path/to/dist/subhijack.jar
+
+Method 3: Verify Installation
+──────────────────────────────
+
+  After loading:
+  1. Look for "SubHijack" tab in main window
+  2. Tab should have 4 sub-tabs: Scanner, Results, Settings, Help
+  3. Console should show: "[+] SubHijack Extension loaded successfully"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ 5. TROUBLESHOOTING BUILD ISSUES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Problem: "javac not found"
+──────────────────────────
+Solution 1: Install JDK
+  • Download from https://www.oracle.com/java/technologies/downloads/
+  • Install latest LTS version (Java 11, 17, or 21)
+  
+Solution 2: Add Java to PATH
+  Windows:
+    1. Find JDK installation: C:\Program Files\Java\jdk-21
+    2. Add to PATH environment variable
+    3. Restart terminal
+    4. Run: javac -version
+  
+  Linux/macOS:
+    export PATH=$PATH:/path/to/jdk/bin
+    javac -version
+
+Problem: "BURP_HOME not set"
+──────────────────────────────
+Solution: Set environment variable
+  Windows:
+    set BURP_HOME=C:\Program Files\Burp
+    
+  Linux/macOS:
+    export BURP_HOME=/path/to/burp
+    
+  Then run: compile.bat or compile.sh
+
+Problem: "Burp Suite JAR not found"
+────────────────────────────────────
+Solution 1: Check BURP_HOME path
+  • Verify directory exists
+  • Check for: burpsuite_community.jar or burpsuite_pro.jar
+  
+Solution 2: Find Burp installation
+  Windows:
+    dir /s "burpsuite*.jar" C:\Program Files
+    
+  Linux/macOS:
+    find ~ -name "burpsuite*.jar"
+
+Problem: "Compilation failed"
+──────────────────────────────
+Solution 1: Check Java version
+  javac -version
+  (Should be 8 or higher)
+
+Solution 2: Check file encoding
+  Ensure all .java files are UTF-8 encoded
+
+Solution 3: Manual compilation
+  cd build directory
+  javac -d build ../*.java
+
+Problem: "dist/subhijack.jar not created"
+──────────────────────────────────────────
+Solution 1: Check build directory
+  Verify: build/ directory has compiled .class files
+  
+Solution 2: Check MANIFEST.MF
+  Verify: MANIFEST.MF exists in correct location
+  
+Solution 3: Manual JAR creation
+  cd build
+  jar cfm ../dist/subhijack.jar ../MANIFEST.MF burp/
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ 6. FIRST RUN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+After successful installation:
+
+1. Launch Burp Suite
+2. Click SubHijack tab
+3. You should see:
+   [+] SubHijack Extension loaded successfully
+   [+] Version: 1.0.0
+   [+] Author: Security Team
+
+4. Navigate to Scanner tab
+5. Enter test URL: https://achangpro.com
+6. Click "Add URL"
+7. Click "Start Scan"
+8. Monitor progress bar
+9. View results in Results tab
+10. Try exporting to different formats
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ 7. DIRECTORY STRUCTURE AFTER BUILD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+subhijack/
+├── Java Source Files (.java files)
+│   ├── SubhijackExtender.java
+│   ├── SubhijackUI.java
+│   ├── ScannerEngine.java
+│   └── ... (8 more .java files)
+│
+├── Configuration
+│   ├── MANIFEST.MF
+│   ├── compile.bat
+│   ├── compile.sh
+│   └── package-info.java
+│
+├── Documentation (.md files)
+│   ├── README.md
+│   ├── QUICK_REFERENCE.md
+│   ├── IMPLEMENTATION_GUIDE.md
+│   ├── PROJECT_SUMMARY.md
+│   └── FILE_GUIDE.md
+│
+├── build/ (created during compilation)
+│   └── burp/subhijack/*.class (compiled bytecode)
+│
+└── dist/ (created during compilation)
+    └── subhijack.jar (FINAL OUTPUT - LOAD THIS IN BURP)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ 8. PERFORMANCE TIPS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+For Faster Builds:
+  • Increase Java heap: set JAVA_OPTS=-Xmx2G
+  • Use faster disk (SSD preferred)
+  • Close other applications
+
+For Faster Scanning:
+  • Increase concurrency in Settings (50-200)
+  • Decrease timeout for faster networks
+  • Use HTTP instead of HTTPS when possible
+
+For Better Accuracy:
+  • Increase timeout (45-60 seconds)
+  • Decrease concurrency (20-30)
+  • Enable verbose mode
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ 9. QUICK COMMANDS REFERENCE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Windows:
+  set BURP_HOME=C:\Program Files\Burp
+  cd C:\Users\navee\OneDrive\Documents\New-projects\subhijack
+  compile.bat
+
+Linux/macOS:
+  export BURP_HOME=/path/to/burp
+  cd ~/Documents/New-projects/subhijack
+  chmod +x compile.sh
+  ./compile.sh
+
+Verify Build:
+  Windows: dir dist\subhijack.jar
+  Linux:   ls -la dist/subhijack.jar
+  macOS:   ls -la dist/subhijack.jar
+
+Check Java Version:
+  java -version
+  javac -version
+
+Find Burp Installation:
+  Windows: dir /s burpsuite*.jar
+  Linux:   find / -name "burpsuite*.jar" 2>/dev/null
+  macOS:   find /Applications -name "Burp*"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ 10. VERIFICATION CHECKLIST
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Before Build:
+  ☐ Java installed (java -version works)
+  ☐ BURP_HOME set to correct path
+  ☐ Burp JAR file exists at BURP_HOME location
+  ☐ All .java source files present
+  ☐ MANIFEST.MF exists
+
+During Build:
+  ☐ No compilation errors displayed
+  ☐ Build directory created
+  ☐ All .java files compiled to .class
+
+After Build:
+  ☐ dist/subhijack.jar created
+  ☐ JAR file > 50 KB in size
+  ☐ build directory contains class files
+
+Extension Loading:
+  ☐ Burp Suite opens without errors
+  ☐ SubHijack tab visible
+  ☐ All 4 sub-tabs present (Scanner, Results, Settings, Help)
+  ☐ No error messages in console
+
+First Use:
+  ☐ Can add URLs
+  ☐ Scan starts without errors
+  ☐ Results display correctly
+  ☐ Can export to all formats
+  ☐ Settings save without errors
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ 11. FILE LOCATIONS SUMMARY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Source Code:        C:\Users\navee\OneDrive\Documents\New-projects\subhijack\
+Build Output:       C:\Users\navee\OneDrive\Documents\New-projects\subhijack\build\
+Final JAR:          C:\Users\navee\OneDrive\Documents\New-projects\subhijack\dist\subhijack.jar
+Burp Suite Path:    C:\Program Files\Burp\
+Burp JAR File:      C:\Program Files\Burp\burpsuite_community.jar (or pro)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ 12. SUPPORT & DOCUMENTATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Quick Start:        QUICK_REFERENCE.md
+Full Guide:         README.md
+Architecture:       IMPLEMENTATION_GUIDE.md
+Technical Info:     IMPLEMENTATION_GUIDE.md
+File Navigation:    FILE_GUIDE.md
+Completion Status:  PROJECT_SUMMARY.md
+
+Help Tab:           In the extension (1000+ lines)
+Console Logs:       Check Burp Suite console output
+Error Messages:     Read carefully and refer to Troubleshooting
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+START HERE: Read QUICK_REFERENCE.md for 5-minute quickstart
+
+═══════════════════════════════════════════════════════════════════════════════
+
+SubHijack v1.0.0 | Build & Deployment Guide | January 14, 2026
+
+═══════════════════════════════════════════════════════════════════════════════
