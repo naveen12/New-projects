@@ -1,0 +1,337 @@
+═══════════════════════════════════════════════════════════════════════════════
+                      JWT AUDITOR v2.1 - QUICK START GUIDE
+═══════════════════════════════════════════════════════════════════════════════
+
+VERSION: 2.1 (Enhanced with all fixes)
+JAR FILE: JWTAuditor.jar (50.8 KB)
+RELEASE DATE: January 13, 2026
+
+═══════════════════════════════════════════════════════════════════════════════
+                            INSTALLATION
+═══════════════════════════════════════════════════════════════════════════════
+
+1. Download JAR file:
+   Location: c:\Users\navee\OneDrive\Documents\New-projects\jwtauditor\JWTAuditor.jar
+
+2. Load into Burp Suite:
+   - Open Burp Suite
+   - Go to Extender → Extensions
+   - Click "Add"
+   - Select JWTAuditor.jar (50.8 KB)
+   - Extension loads automatically
+
+3. See "JWT Auditor" tab in Burp Suite
+
+═══════════════════════════════════════════════════════════════════════════════
+                          TAB DESCRIPTIONS
+═══════════════════════════════════════════════════════════════════════════════
+
+TAB 1: DECODER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Purpose: Parse and display JWT tokens in 4 resizable sections
+
+How to Use:
+1. Paste JWT token in input field
+2. Click "🔓 Decode JWT"
+3. View 4 sections (drag dividers to resize):
+   - Header: Algorithm, type, key ID, JWKS URL
+   - Payload: User data, claims, permissions
+   - Signature: Base64URL encoded
+   - Info: Expiration, token age, claim count
+
+What You'll See:
+Header:
+  Algorithm (alg): HS256
+  Type (typ): JWT
+  Key ID (kid): [if present]
+  JWKS URL (jku): [if present]
+
+Payload:
+  Subject (sub): user123
+  Issuer (iss): https://auth.example.com
+  [All claims displayed]
+
+Signature:
+  [Base64URL encoded signature]
+  Note about validation
+
+Info:
+  Expiration: 2026-01-13 20:00:00
+  Issued: 2026-01-13 19:00:00
+  Age: 5 minutes
+  Total Claims: 8
+
+
+TAB 2: ANALYZER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Purpose: Find 15+ security vulnerabilities
+
+How to Use:
+1. Click "🔎 Analyze Current Token"
+2. View findings in table (drag column headers to resize)
+3. Right-click on any finding:
+
+Right-Click Menu Options:
+✓ Mark as Confirmed    → Status = "CONFIRMED"
+✓ Mark as False Positive → Status = "FALSE +VE"
+📊 Change Severity      → Select CRITICAL/HIGH/MEDIUM/LOW
+📝 Report Issue         → Generate issue report
+
+Severity Levels:
+🔴 CRITICAL: Can be immediately exploited (e.g., none algorithm)
+🟠 HIGH: Likely exploitable (e.g., weak HMAC)
+🟡 MEDIUM: Potentially exploitable (e.g., missing claims)
+🟢 LOW: Minor issues (e.g., non-standard algorithms)
+
+
+TAB 3: BRUTEFORCER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Purpose: Test 1000+ common JWT secrets
+
+Requirements:
+✓ Token must use HMAC (HS256, HS384, HS512)
+✗ Does NOT work with RS256, ES256, RSA, ECDSA
+
+How to Use:
+1. Go to Bruteforcer tab
+2. Click "▶️ Start Bruteforce"
+3. Watch progress bar (0-1000 secrets)
+4. If secret found: "🎉 SECRET FOUND!" message
+5. Click "⏸️ Stop" to pause
+
+Performance:
+- Speed: ~100 secrets/second
+- Typical time: 10-30 seconds
+- Success rate: 50-90% for weak passwords
+
+
+TAB 4: ATTACKS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Purpose: Generate 68+ exploitation payloads
+
+7 Attack Modules:
+
+1. None Algorithm Bypass
+   - Changes alg from RS256/HS256 to 'none'
+   - Removes signature completely
+   - Copies token to clipboard with "📋 Copy Token" button
+
+2. Algorithm Confusion (14 variants)
+   - RS256 → HS256 confusion
+   - Tests all HMAC variants
+   - Copies token to clipboard
+
+3. KID Injection (67 payloads)
+   - SQL injection in Key ID
+   - Path traversal attacks
+   - Command injection payloads
+   - NOW FULLY SCROLLABLE - all 67 tokens visible!
+   - Copy first token button
+
+4. JKU Manipulation
+   - Change JWKS URL to your server
+   - SSRF attack enablement
+   - Copy token button
+
+5. JWK Header Injection
+   - Embed public key in header
+   - Token forgery capability
+   - Copy token button
+
+6. Privilege Escalation
+   - Change role to admin
+   - Modify is_admin flag
+   - Add admin permissions
+   - Copy token button
+
+7. Claim Spoofing (5 scenarios)
+   - Admin impersonation
+   - User impersonation
+   - Permission escalation
+   - Time manipulation
+   - Service account spoofing
+   - Copy token button
+
+Every Attack Now Has:
+✓ "📋 Copy Token" button - copies to clipboard
+✓ Detailed explanation showing WHAT/HOW/WHEN/IMPACT/HOW TO TEST
+✓ Success confirmation message
+
+
+TAB 5: EDITOR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Purpose: Manually create custom JWT tokens
+
+How to Use:
+1. Edit Header JSON (algorithm, type, key ID)
+2. Edit Payload JSON (user data, claims)
+3. Enter HMAC secret
+4. Click "Generate JWT"
+5. Copy token to test
+
+
+TAB 6: HELP & INFO (Last Tab)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Purpose: Complete documentation and guide
+
+Content:
+✓ What is JWT explanation
+✓ How to use each tab
+✓ Vulnerability explanations (15+)
+✓ Real-world exploitation examples
+✓ Penetration testing workflow
+✓ Security best practices
+
+NEW IN v2.1:
+✅ No HTML codes visible - clean text display
+✅ Proper formatting without markup
+✅ Easy to read guide
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                         FEATURE HIGHLIGHTS v2.1
+═══════════════════════════════════════════════════════════════════════════════
+
+NEW FEATURES:
+✅ Copy Token Button
+   - Added to ALL attack payloads
+   - Click "📋 Copy Token" to copy to clipboard
+   - Success confirmation message appears
+   - Works with single tokens and token lists
+
+✅ KID Injection Fully Scrollable
+   - All 67 tokens now visible (was limited to 10)
+   - Scroll through all variations
+   - Each token labeled: [Token 1 of 67], [Token 2 of 67], etc.
+   - Copy First Token button
+
+✅ Analyzer Context Menu
+   - Right-click on any finding
+   - Mark as False Positive
+   - Mark as Confirmed
+   - Change Severity (CRITICAL → LOW)
+   - Generate Issue Report with recommendations
+
+✅ Fixed Help Tab
+   - No HTML codes visible
+   - Clean text rendering
+   - Proper formatting
+
+✅ Fixed Attack Buttons
+   - No HTML markup in button text
+   - All buttons display properly
+   - Clear button labels
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                       REAL-WORLD TESTING WORKFLOW
+═══════════════════════════════════════════════════════════════════════════════
+
+Step 1: INTERCEPT TOKEN
+- Capture JWT from your target application
+- Copy to clipboard
+
+Step 2: DECODE TOKEN
+- Go to Decoder tab
+- Paste JWT in input field
+- Click "🔓 Decode JWT"
+- Review all 4 sections
+- Note the algorithm and claims
+
+Step 3: ANALYZE FOR VULNERABILITIES
+- Go to Analyzer tab
+- Click "🔎 Analyze Current Token"
+- Review findings table
+- Right-click to mark false positives or confirm findings
+- Note CRITICAL and HIGH findings
+
+Step 4: TEST CRITICAL FINDINGS
+For each CRITICAL finding:
+- Go to Attacks tab
+- Click matching attack button
+- Dialog shows explanation and generated token
+- Click "📋 Copy Token"
+- Open Burp Repeater
+- Paste token in Authorization header
+- Send request
+- If accepted = vulnerability confirmed!
+
+Step 5: CRACK SECRET (if HMAC detected)
+- Go to Bruteforcer tab
+- Click "▶️ Start Bruteforce"
+- Wait for result (seconds to 30 seconds)
+- If found: use secret in next step
+
+Step 6: ESCALATE PRIVILEGES
+- Go to Attacks tab
+- Click "6. Privilege Escalation"
+- Generate admin token
+- Copy token
+- Test in application
+- If accepted = full compromise!
+
+Step 7: DOCUMENT FINDINGS
+- Collect evidence (generated tokens, successful tests)
+- Document severity and impact
+- Write recommendations
+- Create issue report (right-click in Analyzer)
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                          QUICK REFERENCE
+═══════════════════════════════════════════════════════════════════════════════
+
+KEYBOARD SHORTCUTS:
+- Right-click on finding → Show context menu
+- Tab 1 → Drag dividers to resize sections
+- Tab 2 → Drag column headers to resize columns
+- Tab 4 → Copy buttons in attack dialogs
+
+CLIPBOARD OPERATIONS:
+- Copy Token button → Copies to system clipboard
+- Paste in Burp Repeater → Test against target
+- Success message → Confirms copy operation
+
+MOST USED BUTTONS:
+Tab 1: "🔓 Decode JWT" → Parse token
+Tab 2: "🔎 Analyze Current Token" → Find vulnerabilities
+Tab 3: "▶️ Start Bruteforce" → Crack secret
+Tab 4: Various attack buttons → Generate exploits
+      "📋 Copy Token" → Copy to clipboard
+
+
+═══════════════════════════════════════════════════════════════════════════════
+                         TROUBLESHOOTING
+═══════════════════════════════════════════════════════════════════════════════
+
+Q: Can't see copy button
+A: In Attacks tab, click any attack button. Dialog appears with copy button at bottom.
+
+Q: KID Injection showing only some tokens
+A: Scroll down in dialog to see all 67 tokens. No token limit anymore!
+
+Q: Help tab showing weird characters
+A: This is fixed in v2.1! Reload the extension.
+
+Q: Analyzer right-click menu not showing
+A: Right-click directly on a finding row (not the header).
+
+Q: Bruteforcer not working
+A: Token must use HMAC (HS256/384/512). RS256/ES256 need private keys.
+
+Q: How to see issue report?
+A: Go to Analyzer tab, right-click finding, select "📝 Report Issue".
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+                    Extension is ready for testing!
+              Load JWTAuditor.jar (50.8 KB) into Burp Suite now.
+
+═══════════════════════════════════════════════════════════════════════════════

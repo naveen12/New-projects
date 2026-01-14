@@ -1,0 +1,190 @@
+═══════════════════════════════════════════════════════════════════════════════
+                        JWT AUDITOR - UPDATES SUMMARY
+═══════════════════════════════════════════════════════════════════════════════
+
+Last Updated: January 13, 2026
+Version: 2.0 (Final)
+JAR File: JWTAuditor.jar (47.4 KB)
+
+═══════════════════════════════════════════════════════════════════════════════
+                              CHANGES MADE
+═══════════════════════════════════════════════════════════════════════════════
+
+1. TAB ORGANIZATION
+   ✓ Moved Help & Info tab from FIRST to LAST position
+   ✓ New tab order:
+     - Tab 1: Decoder
+     - Tab 2: Analyzer
+     - Tab 3: Bruteforcer
+     - Tab 4: Attacks
+     - Tab 5: Editor
+     - Tab 6: Help & Info (Last)
+
+2. RESIZABLE COMPONENTS
+   ✓ Decoder Tab:
+     - 4 output sections now resizable using JSplitPane
+     - Drag horizontal dividers to resize (Header/Payload, Signature/Info)
+     - Drag vertical dividers to resize top/bottom sections
+     - Dividers have one-touch expand buttons
+     - Smooth resize with flexible weighting
+
+   ✓ Analyzer Tab:
+     - Findings table columns now resizable
+     - Drag column headers to resize (Severity, Title, Description)
+     - Auto-resize mode for responsive layout
+     - All columns marked as resizable
+
+3. DETAILED ATTACK EXPLANATIONS
+   ✓ None Algorithm Bypass: Complete explanation added
+   ✓ Algorithm Confusion: Added algorithm confusion methodology
+   ✓ KID Injection: SQL, path traversal, command injection details
+   ✓ JKU Manipulation: SSRF exploitation process
+   ✓ JWK Header Injection: Key injection mechanics
+   ✓ Privilege Escalation: Role modification details
+   ✓ Claim Spoofing: 5 real-world impersonation scenarios
+
+   Each attack now shows:
+   - WHAT IT DOES (purpose)
+   - HOW IT WORKS (mechanics)
+   - WHEN IT WORKS (conditions)
+   - IMPACT (severity)
+   - HOW TO TEST (step-by-step)
+
+4. README.MD UPDATES
+   ✓ Removed all other markdown files from documentation needs
+   ✓ Consolidated all information into README.md
+   ✓ Added tab-by-tab guide
+   ✓ Added real-world testing workflow
+   ✓ Added attack examples with payloads
+   ✓ Added features summary table
+   ✓ Added technical details section
+   ✓ Added troubleshooting FAQ
+   ✓ Added version history
+
+5. FILE CLEANUP
+   ✓ Deleted ISSUES_FIXED_GUIDE.md (no longer needed)
+   ✓ Kept only README.md for overview
+   ✓ All other .md files in directory remain (not used by tool)
+
+═══════════════════════════════════════════════════════════════════════════════
+                              TECHNICAL DETAILS
+═══════════════════════════════════════════════════════════════════════════════
+
+RESIZABLE COMPONENTS IMPLEMENTATION:
+
+1. Decoder Tab - JSplitPane Structure:
+   ```
+   Top Split Pane (Horizontal):
+   ├─ Header Panel (left)
+   └─ Payload Panel (right)
+   
+   Bottom Split Pane (Horizontal):
+   ├─ Signature Panel (left)
+   └─ Info Panel (right)
+   
+   Main Split Pane (Vertical):
+   ├─ Top Split (upper)
+   └─ Bottom Split (lower)
+   ```
+
+2. Analyzer Tab - Resizable Columns:
+   - setResizable(true) on all columns
+   - Column headers can be dragged to resize
+   - Width: Severity=120px, Title=200px, Description=400px
+   - AUTO_RESIZE_SUBSEQUENT_COLUMNS mode
+
+3. Attack Explanations:
+   - Added emoji icons (🎯) for clarity
+   - Structured with headers (WHAT, HOW, WHEN, IMPACT, TESTING)
+   - Added real-world examples
+   - Multi-line dialog for better readability
+
+═══════════════════════════════════════════════════════════════════════════════
+                              HOW TO USE
+═══════════════════════════════════════════════════════════════════════════════
+
+STEP 1: LOAD EXTENSION
+1. Open Burp Suite
+2. Extender → Extensions → Add
+3. Select: JWTAuditor.jar (47.4 KB)
+4. Extension loads as new tab
+
+STEP 2: DECODE JWT (Tab 1)
+1. Paste JWT token in input field
+2. Click "🔓 Decode JWT"
+3. View 4 resizable output sections
+4. DRAG DIVIDERS to resize sections as needed
+
+STEP 3: ANALYZE TOKEN (Tab 2)
+1. Click "🔎 Analyze Current Token"
+2. View findings in table
+3. DRAG COLUMN HEADERS to resize columns
+4. Read severity levels and explanations
+
+STEP 4: BRUTE FORCE (Tab 3) [if HMAC]
+1. Click "▶️ Start Bruteforce"
+2. Watch progress bar
+3. If secret found: Use in next step
+
+STEP 5: EXPLOIT (Tab 4)
+1. Click attack button
+2. Follow dialog explanations
+3. Generate attack payloads
+4. Test in Burp Repeater
+
+STEP 6: CUSTOM TESTS (Tab 5)
+1. Edit header/payload
+2. Enter secret
+3. Click "Generate JWT"
+4. Copy token to test
+
+STEP 7: READ HELP (Tab 6)
+1. Scroll through Help & Info tab
+2. Learn all features
+3. See examples and workflow
+
+═══════════════════════════════════════════════════════════════════════════════
+                          FEATURES AT A GLANCE
+═══════════════════════════════════════════════════════════════════════════════
+
+Decoder:      ✓ Parse & display JWT (4 resizable sections)
+Analyzer:     ✓ Find 15+ vulnerabilities (resizable table)
+Bruteforcer:  ✓ Test 1000+ secrets (real-time progress)
+Attacks:      ✓ 7 modules, 68+ payloads (detailed explanations)
+Editor:       ✓ Create custom tokens (manual modification)
+Help:         ✓ Complete guide (last tab)
+
+═══════════════════════════════════════════════════════════════════════════════
+                             COMPILATION STATUS
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ All 11 Java classes compiled successfully
+✅ Zero compilation errors
+✅ JAR file: 47.4 KB
+✅ 17 class files packaged
+✅ Ready for production use
+
+═══════════════════════════════════════════════════════════════════════════════
+                            QUICK TROUBLESHOOTING
+═══════════════════════════════════════════════════════════════════════════════
+
+Q: How do I resize decoder sections?
+A: Drag the divider lines between Header/Payload and Signature/Info sections
+
+Q: How do I resize analyzer columns?
+A: Click and drag the column header borders in the findings table
+
+Q: Why is Help tab at the end?
+A: So testers immediately start with Decoder/Analyzer for hands-on work
+
+Q: Attacks seem complex - where's the help?
+A: Click any attack button to see detailed explanation dialog
+
+Q: What about the other markdown files?
+A: README.md is the main documentation - others are reference only
+
+═══════════════════════════════════════════════════════════════════════════════
+
+Ready for testing! Load JWTAuditor.jar into Burp Suite and start penetration testing.
+
+═══════════════════════════════════════════════════════════════════════════════

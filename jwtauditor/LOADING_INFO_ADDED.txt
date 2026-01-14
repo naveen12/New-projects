@@ -1,0 +1,204 @@
+═══════════════════════════════════════════════════════════════════════════════
+                    EXTENSION LOADING INFORMATION ADDED
+═══════════════════════════════════════════════════════════════════════════════
+
+Version: 2.2 (Enhanced with Loading Info)
+Date: January 13, 2026
+JAR File: JWTAuditor.jar (52.6 KB)
+
+═══════════════════════════════════════════════════════════════════════════════
+                    WHAT YOU'LL SEE WHEN LOADING
+═══════════════════════════════════════════════════════════════════════════════
+
+When you load JWTAuditor.jar into Burp Suite, the following output appears in
+the Burp Extensions console (bottom of Burp Suite):
+
+─────────────────────────────────────────────────────────────────────────────
+BANNER MESSAGE:
+─────────────────────────────────────────────────────────────────────────────
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║                       JWT AUDITOR - EXTENSION LOADED                         ║
+║                                                                              ║
+║                 Professional JWT Security Testing Tool v2.1                  ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+[JWT Auditor] ════════════════════════════════════════════════════════════
+[JWT Auditor] EXTENSION FEATURES:
+[JWT Auditor]
+[JWT Auditor] 🔓 DECODER TAB
+[JWT Auditor]    • Parse and display JWT tokens (header, payload, signature, info)
+[JWT Auditor]    • Resizable 4-section layout for detailed inspection
+[JWT Auditor]    • Shows expiration, issued time, claim count
+[JWT Auditor]
+[JWT Auditor] 🔍 ANALYZER TAB
+[JWT Auditor]    • 15+ security vulnerability checks
+[JWT Auditor]    • Color-coded severity levels (CRITICAL → LOW)
+[JWT Auditor]    • Right-click context menu: Mark false positives, change severity
+[JWT Auditor]    • Generate detailed issue reports
+[JWT Auditor]
+[JWT Auditor] ⚡ BRUTEFORCER TAB
+[JWT Auditor]    • Tests 1000+ common JWT secrets
+[JWT Auditor]    • Works with HMAC algorithms (HS256, HS384, HS512)
+[JWT Auditor]    • Real-time progress tracking
+[JWT Auditor]    • Typical time: 10-30 seconds per token
+[JWT Auditor]
+[JWT Auditor] ⚔️ ATTACKS TAB
+[JWT Auditor]    • 7 specialized attack modules (68+ payloads)
+[JWT Auditor]    1. None Algorithm Bypass (signature bypass)
+[JWT Auditor]    2. Algorithm Confusion (14 variants)
+[JWT Auditor]    3. KID Injection (67 payloads - fully scrollable)
+[JWT Auditor]    4. JKU Manipulation (SSRF attack)
+[JWT Auditor]    5. JWK Header Injection (key embedding)
+[JWT Auditor]    6. Privilege Escalation (role modification)
+[JWT Auditor]    7. Claim Spoofing (5 impersonation scenarios)
+[JWT Auditor]    • All attacks include copy-to-clipboard button
+[JWT Auditor]
+[JWT Auditor] ✏️ EDITOR TAB
+[JWT Auditor]    • Manually create custom JWT tokens
+[JWT Auditor]    • Edit header and payload JSON
+[JWT Auditor]    • Specify HMAC secret for signing
+[JWT Auditor]
+[JWT Auditor] 📚 HELP & INFO TAB
+[JWT Auditor]    • Comprehensive guide for all features
+[JWT Auditor]    • Real-world exploitation examples
+[JWT Auditor]    • Penetration testing methodology
+[JWT Auditor]
+[JWT Auditor] ════════════════════════════════════════════════════════════
+[JWT Auditor] QUICK START:
+[JWT Auditor]
+[JWT Auditor] 1. Switch to 'JWT Auditor' tab in Burp Suite
+[JWT Auditor] 2. Paste a JWT token in the Decoder tab
+[JWT Auditor] 3. Click 'Analyze Current Token' to find vulnerabilities
+[JWT Auditor] 4. Generate attack payloads from the Attacks tab
+[JWT Auditor] 5. Test in Burp Repeater with Copy Token button
+[JWT Auditor]
+[JWT Auditor] ════════════════════════════════════════════════════════════
+[JWT Auditor] STATUS: ✅ All components loaded successfully
+[JWT Auditor] Ready for JWT security testing!
+[JWT Auditor] ════════════════════════════════════════════════════════════
+
+─────────────────────────────────────────────────────────────────────────────
+
+Plus component loading status messages:
+
+[JWT Auditor] ✅ Main UI tab registered
+[JWT Auditor] ✅ Message editor tab factory registered
+[JWT Auditor] ✅ Context menu factory registered
+
+═══════════════════════════════════════════════════════════════════════════════
+                         TECHNICAL IMPLEMENTATION
+═══════════════════════════════════════════════════════════════════════════════
+
+File Modified: JWTAuditorExtender.java
+
+Changes:
+1. Added printBanner() method
+   - Displays ASCII art banner with extension name and version
+   - Shows on extension startup
+
+2. Added printLoadingComplete() method
+   - Lists all 6 tabs with detailed feature descriptions
+   - Shows quick start guide (5 steps)
+   - Displays final status message
+   - Uses checkmarks (✅) and emoji icons for clarity
+
+3. Enhanced registerExtenderCallbacks() method
+   - Calls printBanner() immediately when loading starts
+   - Prints component registration messages for:
+     • Main UI tab
+     • Message editor tab factory
+     • Context menu factory
+   - Calls printLoadingComplete() at the end
+
+4. Added console output with [JWT Auditor] prefix
+   - Easy to identify extension messages
+   - Professional formatting
+   - Informative for new users
+
+═══════════════════════════════════════════════════════════════════════════════
+                            USER EXPERIENCE
+═══════════════════════════════════════════════════════════════════════════════
+
+BEFORE (v2.1):
+- Minimal console output
+- User unsure what features are available
+- Need to manually explore tabs
+
+AFTER (v2.2):
+- Beautiful banner on load
+- Complete feature list displayed
+- Quick start guide provided
+- Component loading feedback
+- Professional, welcoming message
+- Clear status indicators (✅)
+- Emoji icons for visual clarity
+
+BENEFITS:
+✓ New users immediately understand all features
+✓ Quick start guide reduces onboarding time
+✓ Component status shows extension is loading properly
+✓ Professional appearance builds confidence
+✓ Easy to understand feature breakdown
+✓ Visual indicators (emoji) improve readability
+
+═══════════════════════════════════════════════════════════════════════════════
+                         WHERE TO FIND THE OUTPUT
+═══════════════════════════════════════════════════════════════════════════════
+
+In Burp Suite:
+
+1. Extender → Extensions → Select "JWT Auditor"
+2. Look at the "Output" tab (bottom of screen)
+3. You'll see the banner and feature list
+
+Or:
+
+1. Click "Extender" tab
+2. Click "Extensions" subtab
+3. Select "JWT Auditor" from the list
+4. Look at the "Output" section below
+
+The entire loading message displays there, providing complete information
+about what the extension can do and how to get started.
+
+═══════════════════════════════════════════════════════════════════════════════
+                            FILE INFORMATION
+═══════════════════════════════════════════════════════════════════════════════
+
+Updated File: JWTAuditorExtender.java
+Size: ~2.5 KB (increased from 1.6 KB with new methods)
+Compilation: ✅ Successful (zero errors)
+
+JAR File: JWTAuditor.jar
+Size: 52.6 KB (increased from 50.8 KB)
+Contains: 17 compiled class files
+Status: Ready for deployment
+
+═══════════════════════════════════════════════════════════════════════════════
+                           HOW TO DEPLOY
+═══════════════════════════════════════════════════════════════════════════════
+
+1. Close Burp Suite (if running with old version)
+
+2. Load the new JAR file:
+   - Open Burp Suite
+   - Extender → Extensions → Add
+   - Select: JWTAuditor.jar (52.6 KB)
+   - Click "Next"
+   - Click "Close"
+
+3. Watch the Extender Output tab
+   You'll see the beautiful banner and feature list appear!
+
+4. Click on "JWT Auditor" tab to start using
+
+═══════════════════════════════════════════════════════════════════════════════
+
+Extension v2.2 is ready for deployment!
+
+Load JWTAuditor.jar (52.6 KB) into Burp Suite to see the new loading info.
+
+═══════════════════════════════════════════════════════════════════════════════

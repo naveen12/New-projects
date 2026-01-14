@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Created-By: Cariddi Development Team
+Main-Class: burp.CariddiExtender
+Implementation-Title: Cariddi - Advanced Endpoint & Secrets Scanner
+Implementation-Version: 1.0.0
+Implementation-Vendor: Security Research Team
+Bundle-Name: Cariddi
+Bundle-Version: 1.0.0
+Class-Path: .
